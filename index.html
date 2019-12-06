@@ -105,7 +105,7 @@ $(window).on('hashchange',function(){
     window.location.reload(true); 
 });
 const loadSubPage = function(page) {
-	window.location=window.location.origin + window.location.search + '#' + page
+	window.location=window.location.origin + window.location.pathname + window.location.search + '#' + page
 };
 includeHTML();
 try {
