@@ -1,0 +1,25 @@
+<div class="w3-row-padding" style="margin:0 -16px" onload="initDailyWins(showDailyWinsPlot);">
+    <div class="w3-twothird">
+        <h5>Wins Chart</h5>
+        <div class="chart-container" style="position: relative; width:100%">
+            <canvas id="barchart">Loading chart</canvas>
+        </div>
+    </div>
+    <div class="w3-third">
+        <h5>Query</h5>
+        <div style="width: 100%;">
+            <form class="pure-form pure-form-stacked" onsubmit="return false;">
+                <select id="gameSelect" name="gameSelect" class="darkform" disabled></select>
+                
+                <label for="newusername">Username of user to add:</label>
+                <input type="text" id="newusername" placeholder="Name#XXXX" class="darkform">
+                <button id="addUser" class="pure-button button-c" disabled>Add User</button>
+                
+                <label for="startDateSelect">Date range start:</label>
+                <input type="date" id="startDateSelect" class="darkform">
+                <label for="toDateSelect">Date range end:</label>
+                <input type="date" id="toDateSelect" class="darkform">
+            </form>
+        </div>
+    </div>
+</div>

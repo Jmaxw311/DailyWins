@@ -1,40 +1,124 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-	<link rel="stylesheet" href="app.css">
-    <!--import jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="dailywinsapi.js"></script>
-	<script src="chart.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="plot.js"></script>
-	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
-</head>
-<body>
-    <div class=".pageBounds">
-		<div class="chart-container" style="position: relative; height:60vh; width:95vw">
-			<canvas id="barchart">Loading chart</canvas>
-		</div>
-		<div class="overlayui">
-			<form class="pure-form pure-form-stacked" onsubmit="return false;">
-					<select id="gameSelect" name="gameSelect" disabled></select>
-					
-					<label for="newusername">Username of user to add:</label>
-					<input type="text" id="newusername" placeholder="Name#XXXX">
-					<button id="addUser" class="pure-button" disabled>Add User</button>
-					
-					<label for="startDateSelect">Date range start:</label>
-					<input type="date" id="startDateSelect">
-					<label for="toDateSelect">Date range end:</label>
-					<input type="date" id="toDateSelect">
-			</form>
-		</div>
-	</div>
-	
-    <script>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="chart.js"></script>
+<script src="dailywinsapi.js"></script>
+<script src="includeHTML.js"></script>
+<script src="plot.js"></script>
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-black">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right"><a href="http://dailywinsapi.zapto.org" class="discordbutton"><button>Log in with Discord</button></a></span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-dark-gray w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img class="w3-circle w3-margin-right" style="width:46px" id="myavatar">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong><span id="myusername">Dude</span></strong></span><br>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a onclick="loadSubPage('wins');" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Wins</a>
+    <a onclick="loadSubPage('api');" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  API</a><br><br>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-users"></i> Daily Wins</b></h5>
+  </header>
+
+  <div class="w3-panel">
+	<script>
+		var hash = window.location.hash.substr(1).split('?')[0];
+		var div = document.createElement('div'); // Create a new div
+		div.setAttribute("w3-include-html", 'content/' + hash + '.html');
+		script = document.scripts[document.scripts.length - 1]; // A reference to the currently running script
+		script.parentElement.insertBefore(div, script); // Add the newly-created div to the page
+	</script>
+  </div>
+  <hr>
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-grey">
+    <h4>CSS 436 A</h4>
+    <p>Created by Joel Maxwell and Sam Krogh</p>
+    <p>CSS Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> and <a href="https://purecss.io/" target="_blank">Pure.css</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
+$(window).on('hashchange',function(){ 
+    window.location.reload(true); 
+});
+const loadSubPage = function(page) {
+	window.location=window.location.origin + window.location.search + '#' + page
+};
+includeHTML();
+try {
+	var delayInMilliseconds = 1000; //1 second
+
+	setTimeout(function() {
 		initDailyWins(showDailyWinsPlot);
-    </script>
+	}, delayInMilliseconds);
+    
+} catch (error) {
+	console.error(error);
+}
+</script>
+
 </body>
 </html>

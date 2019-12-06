@@ -1,3 +1,8 @@
+
+// Simple caches to hold data in case of a dropdown form change
+var gameTitleMappings = {};
+var userIDMappings = {};
+
 var showDailyWinsPlot = function(apiGet,apiPost) {
 console.log("HERE WE GO!");
 window.chartColors = {
@@ -26,9 +31,7 @@ var barChartData = {
     datasets: []
 }
 
-// Simple caches to hold data in case of a dropdown form change
-var gameTitleMappings = {};
-var userIDMappings = {};
+
 //var userIdNum = null;
 
 var previousQueriedIdentifiers = [];
@@ -238,13 +241,22 @@ var updateBarChart = function() {
 
 // Callback function that uses the value returned by the
 // userID API call to get our main user's user ID
-var receiveMyId = function(userId) {
-    console.log('got userId: ' + userId);
+var receiveMyId = function(userInfo) {
+    console.log('got userId: ' + userInfo);
     
     //userIdNum = userId;
     //document.getElementById("submitbutton").disabled = false;
+    $("#myusername").text(userInfo.username);
+
+    avatarUrl = 'https://cdn.discordapp.com/avatars/'
+    try {
+        avatarUrl = avatarUrl + userInfo.userId + '/' + userInfo.avatar + '.png'
+        $("#myavatar").attr("src",avatarUrl);
+    } catch (error) {
+        console.error(error);
+    }
     
-    apiGet('users/identity/' + userId, addUsername);
+    addUsername(userInfo)
 };
 
 var letsGo = function() {

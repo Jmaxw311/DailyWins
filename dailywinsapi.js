@@ -8,7 +8,7 @@ const initDailyWins = function(onDailyWinsApiReady) {
         var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
         return v ? v[2] : null;
     };
-
+    
     const getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1),
             sURLVariables = sPageURL.split('&'),
@@ -30,10 +30,6 @@ const initDailyWins = function(onDailyWinsApiReady) {
 
     var onSuccess = function(data) {
         var apiKey = data['apiKey'];
-        apiCookie = "dwapikey = " + apiKey + ";secure;httponly;domain=ddby5gvlcj.execute-api.us-east-2.amazonaws.com";
-        document.cookie = apiCookie;
-        console.log("set cookie");
-
         var apiGet = function(resource, callback) {
             $.ajax({
                 url: apiUrl + resource,
@@ -68,7 +64,7 @@ const initDailyWins = function(onDailyWinsApiReady) {
 
     var failAuth = function(xhr,status,error) {
         console.log("%s %s %s",xhr,status,error);
-        window.location.replace("http://dailywinsapi.zapto.org");
+        onSuccess({ "apiKey": getUrlParameter('api') });
     }
     
     var code = getUrlParameter('code');
@@ -81,3 +77,7 @@ const initDailyWins = function(onDailyWinsApiReady) {
         error: failAuth
     });
 };
+
+const requestAuthorization = function() {
+    window.location.replace("http://dailywinsapi.zapto.org");
+}

@@ -15,3 +15,46 @@
     left: 25pt;
     top: 70pt;
 }
+
+.darkform, .darkform option {
+    background: black; /* this is a green */
+    color: white;
+}
+
+select.darkform {
+    color: black;
+    background: gray;
+}
+
+.lightform {
+    color: black; /* this is a green */
+    background: white;
+}
+
+a.discordbutton {
+    text-decoration: none;
+}
+
+a.discordbutton:link {
+    text-decoration: none;
+}
+
+a.discordbutton:visited {
+    text-decoration: none;
+}
+
+a.discordbutton button:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a.discordbutton button {
+    background: #697ec4 !important;
+    border-radius: 3px !important;
+    border: 0 !important;
+    color: #fff !important;
+    display: block !important;
+    line-height: 30px !important;
+    outline: 0 !important;
+    width: 100% !important;
+  }
