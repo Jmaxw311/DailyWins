@@ -57,13 +57,16 @@ var getRelativeDateString = function(daysOffset) {
     return relDate
 };
 
+try {
+    toDateSelect.max = getRelativeDateString(0);
+    toDateSelect.value = getRelativeDateString(0);
+    startDateSelect.min = "2019-11-01";
+    startDateSelect.max = toDateSelect.value;
+    startDateSelect.value = getRelativeDateString(startDateOffset);
+    toDateSelect.min = startDateSelect.value;
+} catch (error) {
 
-toDateSelect.max = getRelativeDateString(0);
-toDateSelect.value = getRelativeDateString(0);
-startDateSelect.min = "2019-11-01";
-startDateSelect.max = toDateSelect.value;
-startDateSelect.value = getRelativeDateString(startDateOffset);
-toDateSelect.min = startDateSelect.value;
+}
 
 startDateSelect.onchange = function() {
     var rawDate = startDateSelect.value;
@@ -198,6 +201,13 @@ var populateUserGameInfo = function(winsData){
             gameWinsData[gameId][userId][date] = winsData.dailyWins[date][gameId];
         }
     }
+
+    toDateSelect.max = getRelativeDateString(0);
+    toDateSelect.value = getRelativeDateString(0);
+    startDateSelect.min = "2019-11-01";
+    startDateSelect.max = toDateSelect.value;
+    startDateSelect.value = getRelativeDateString(startDateOffset);
+    toDateSelect.min = startDateSelect.value;
     
     addUserButton.disabled = false;
     updateBarChart();
