@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" href="app.css">
+    <!--import jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="dailywinsapi.js"></script>
+	<script src="chart.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="plot.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+    <div class=".pageBounds">
+		<div class="chart-container" style="position: relative; height:60vh; width:95vw">
+			<canvas id="barchart">Loading chart</canvas>
+		</div>
+		<div class="overlayui">
+			<form class="pure-form pure-form-stacked" onsubmit="return false;">
+					<select id="gameSelect" name="gameSelect" disabled></select>
+					
+					<label for="newusername">Username of user to add:</label>
+					<input type="text" id="newusername" placeholder="Name#XXXX">
+					<button id="addUser" class="pure-button" disabled>Add User</button>
+					
+					<label for="startDateSelect">Date range start:</label>
+					<input type="date" id="startDateSelect">
+					<label for="toDateSelect">Date range end:</label>
+					<input type="date" id="toDateSelect">
+			</form>
+		</div>
+	</div>
+	
+    <script>
+		initDailyWins(showDailyWinsPlot);
+    </script>
+</body>
+</html>
