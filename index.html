@@ -108,15 +108,19 @@ const loadSubPage = function(page) {
 	window.location=window.location.origin + window.location.pathname + '#' + page
 };
 includeHTML();
+var showApiKey;
 try {
 	var delayInMilliseconds = 1000; //1 second
-
-	setTimeout(function() {
-		initDailyWins(showDailyWinsPlot);
+	
+	setTimeout(function() {	
+		initDailyWins(function(a,b,giveApiKey) { 
+			showApiKey = giveApiKey;
+			showDailyWinsPlot(a,b);  
+		});
 	}, delayInMilliseconds);
     
 } catch (error) {
-	console.error(error);
+	console.error('failed to initialize the api: ' + error);
 }
 </script>
 

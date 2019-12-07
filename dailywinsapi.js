@@ -59,7 +59,15 @@ const initDailyWins = function(onDailyWinsApiReady) {
             });
         };
 
-        onDailyWinsApiReady(apiGet, apiPost); // run code that uses the api
+        var giveApiKey = function() {
+            if (String(window.alert) == "function alert() { [native code] }") {
+                alert("Your API key is: \n" + apiKey);
+            } else {
+                console.error("Your api key was not displayed because the alert() function may have been modified to intercept the key.");
+            }
+        }
+
+        onDailyWinsApiReady(apiGet, apiPost, giveApiKey); // run code that uses the api
     };
 
     var failAuth = function(xhr,status,error) {
