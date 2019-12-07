@@ -17,7 +17,8 @@ postWins = function() {
     apiPost('wins', { 
         'gameId': String(gameId), 
         'wins': $('#winsInput').val() }, 
-        function(data) {console.log("posted wins");}
+        function(data) { alert("Wins have been posted!\nQuery results may take some time to update."); },
+        function(data) { alert("Failed to post wins."); }
     );
 }
 

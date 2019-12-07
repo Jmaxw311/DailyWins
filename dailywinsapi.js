@@ -28,15 +28,17 @@ const initDailyWins = function(onDailyWinsApiReady) {
     // if(apiKey === null || typeof apiKey === 'undefined')
     //     apiKey = getCookie('dwapikey');
 
-    var onSuccess = function(data) {
+    var onSuccess = function(data, customHeaders) {
         var apiKey = data['apiKey'];
+        var headers = {
+            "x-api-key": apiKey
+        };
+        headers = Object.assign({}, customHeaders, headers);
         var apiGet = function(resource, callback, onFail=function(xhr,status,error){console.log("%s %s %s",xhr,status,error);}) {
             $.ajax({
                 url: apiUrl + resource,
                 type: 'get',
-                headers: {
-                    "x-api-key": apiKey
-                },
+                headers: headers,
                 beforeSend: function(xhr){xhr.setRequestHeader("x-api-key", apiKey);},
                 //dataType: 'json',
                 success: callback,

@@ -16,7 +16,7 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-black">
+<body class="w3-black" onload="accessApi();">
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -108,11 +108,12 @@ const loadSubPage = function(page) {
 	window.location=window.location.origin + window.location.pathname + '#' + page
 };
 includeHTML();
-var showApiKey;
-try {
-	var delayInMilliseconds = 1000; //1 second
-	
-	setTimeout(function() {	
+
+function accessApi() {
+	var showApiKey;
+	try {
+		var delayInMilliseconds = 200; //1 second
+		
 		initDailyWins(function(a,b,giveApiKey) { 
 			showApiKey = giveApiKey;
 			try {
@@ -121,10 +122,10 @@ try {
 				console.error(error);
 			}
 		});
-	}, delayInMilliseconds);
-    
-} catch (error) {
-	console.error('failed to initialize the api: ' + error);
+		
+	} catch (error) {
+		console.error('failed to initialize the api: ' + error);
+	}
 }
 </script>
 
