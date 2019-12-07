@@ -1,1 +1,9 @@
 <button onclick="showApiKey();" class="pure-button button-c">Get my API key</button>
+<hr>
+<form class="pure-form pure-form-stacked" onsubmit="return false;">
+    <label for="gameSelect">Log wins:</label>
+    <select id="gameSelect" name="gameSelect" class="darkform" disabled></select>
+    
+    <input type="number" id="winsInput" placeholder="# of wins" class="darkform">
+    <button class="pure-button button-c" onclick="postWins();">Submit</button>
+</form>

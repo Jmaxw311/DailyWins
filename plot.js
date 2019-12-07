@@ -3,7 +3,24 @@
 var gameTitleMappings = {};
 var userIDMappings = {};
 
+var postWins;
+
 var showDailyWinsPlot = function(apiGet,apiPost) {
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
+
+postWins = function() {
+    var gameTitle = String($("select[name='gameSelect'] option:selected").text());
+    gameId = gameTitleMappings[gameTitle];
+    apiPost('wins', { 
+        'gameId': String(gameId), 
+        'wins': $('#winsInput').val() }, 
+        function(data) {console.log("posted wins");}
+    );
+}
+
 console.log("HERE WE GO!");
 window.chartColors = {
     red: 'rgb(255, 99, 132)',
