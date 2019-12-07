@@ -2,7 +2,7 @@
 
 const initDailyWins = function(onDailyWinsApiReady) {
 
-    var apiUrl = 'https://ddby5gvlcj.execute-api.us-east-2.amazonaws.com/prod/';
+    var apiUrl = 'https://dkyl9z4wmpycr.cloudfront.net/api/';
 
     const getCookie = function(name) {
         var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
