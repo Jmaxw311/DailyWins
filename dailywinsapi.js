@@ -61,7 +61,7 @@ const initDailyWins = function(onDailyWinsApiReady) {
 
         var giveApiKey = function() {
             if (String(window.alert) == "function alert() { [native code] }") {
-                alert("Your API key is: \n" + apiKey);
+                alert("Your API key is: " + apiKey);
             } else {
                 console.error("Your api key was not displayed because the alert() function may have been modified to intercept the key.");
             }
