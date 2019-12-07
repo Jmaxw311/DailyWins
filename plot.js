@@ -181,7 +181,11 @@ var populateGameField = function(idMappings){
         console.error(error);
     }
     
-    apiGet('users/me', receiveMyId);
+    var onAuthFail = function() { 
+        //window.location.assign('https://discordapp.com/api/oauth2/authorize?client_id=648629113132810262&redirect_uri=https%3A%2F%2Fdkyl9z4wmpycr.cloudfront.net%2Findex.html&response_type=code&scope=identify'); 
+        alert("Please sign in to use this service.");
+    };
+    apiGet('users/me', receiveMyId, onAuthFail);
 }
 
 var resetBarChart = function() {

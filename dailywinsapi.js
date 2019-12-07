@@ -30,7 +30,7 @@ const initDailyWins = function(onDailyWinsApiReady) {
 
     var onSuccess = function(data) {
         var apiKey = data['apiKey'];
-        var apiGet = function(resource, callback) {
+        var apiGet = function(resource, callback, onFail=function(xhr,status,error){console.log("%s %s %s",xhr,status,error);}) {
             $.ajax({
                 url: apiUrl + resource,
                 type: 'get',
@@ -40,7 +40,7 @@ const initDailyWins = function(onDailyWinsApiReady) {
                 beforeSend: function(xhr){xhr.setRequestHeader("x-api-key", apiKey);},
                 //dataType: 'json',
                 success: callback,
-                error: function(xhr,status,error){console.log("%s %s %s",xhr,status,error);}
+                error: onFail
             });
         };
 
