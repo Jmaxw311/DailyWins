@@ -68,41 +68,45 @@ try {
 
 }
 
-startDateSelect.onchange = function() {
-    var rawDate = startDateSelect.value;
-    
-    var startDate = new Date(rawDate);
-    var today = new Date(getRelativeDateString(1));
-    
-    var dayDiff = (startDate.getTime() - today.getTime()) / (1000*60*60*24);
-    
-    startDateOffset = dayDiff;
-    
-    toDateSelect.min = rawDate;
-    
-    if(startDateOffset < earliestDateOffset){
-        earliestDateOffset = startDateOffset;
-        updateEachUser();
+if (startDateSelect != null) {
+    startDateSelect.onchange = function() {
+        var rawDate = startDateSelect.value;
+        
+        var startDate = new Date(rawDate);
+        var today = new Date(getRelativeDateString(1));
+        
+        var dayDiff = (startDate.getTime() - today.getTime()) / (1000*60*60*24);
+        
+        startDateOffset = dayDiff;
+        
+        toDateSelect.min = rawDate;
+        
+        if(startDateOffset < earliestDateOffset){
+            earliestDateOffset = startDateOffset;
+            updateEachUser();
+        }
+        else
+            updateBarChart();
     }
-    else
-        updateBarChart();
 }
 
-toDateSelect.onchange = function() {
-    var rawDate = toDateSelect.value;
-    var toDate = new Date(rawDate);
-    var today = new Date(getRelativeDateString(1));
-    
-    console.log(toDate.getTime().toString());
-    console.log(today.getTime().toString());
-    
-    var dayDiff = (toDate.getTime() - today.getTime()) / (1000*60*60*24) + 1;
-    
-    toDateOffset = dayDiff;
-    
-    startDateSelect.max = rawDate;
-    
-    updateBarChart();
+if (toDateSelect != null) {
+    toDateSelect.onchange = function() {
+        var rawDate = toDateSelect.value;
+        var toDate = new Date(rawDate);
+        var today = new Date(getRelativeDateString(1));
+        
+        console.log(toDate.getTime().toString());
+        console.log(today.getTime().toString());
+        
+        var dayDiff = (toDate.getTime() - today.getTime()) / (1000*60*60*24) + 1;
+        
+        toDateOffset = dayDiff;
+        
+        startDateSelect.max = rawDate;
+        
+        updateBarChart();
+    }
 }
 
 var updateEachUser = function() {
@@ -110,47 +114,55 @@ var updateEachUser = function() {
         startGetUserGameInfo(userId);
 }
 
-addUserButton.onclick = function() {
-    var userIdentifier = newUserField.value;
-    
-    if((userIdentifier in previousQueriedIdentifiers)){
-        console.log("User has already been queried");
-        return;
-    }
-    
-    var split = userIdentifier.split('#');
-    
-    if(split.length > 1){
-        var username = userIdentifier.split('#')[0];
-        var discriminator = userIdentifier.split('#')[1];
+if (addUserButton != null) {
+    addUserButton.onclick = function() {
+        var userIdentifier = newUserField.value;
         
-        startGetUserGameInfoFromIdentity(username, discriminator);
-        newUserField.value = '';
+        if((userIdentifier in previousQueriedIdentifiers)){
+            console.log("User has already been queried");
+            return;
+        }
+        
+        var split = userIdentifier.split('#');
+        
+        if(split.length > 1){
+            var username = userIdentifier.split('#')[0];
+            var discriminator = userIdentifier.split('#')[1];
+            
+            startGetUserGameInfoFromIdentity(username, discriminator);
+            newUserField.value = '';
+        }
+        else
+            console.log("Invalid user identifier");
     }
-    else
-        console.log("Invalid user identifier");
 }
 
-selectGameMenu.onchange = function() {
-    currentGameId = gameTitleMappings[selectGameMenu.value];
-    updateBarChart();
+if (selectGameMenu != null) {
+    selectGameMenu.onchange = function() {
+        currentGameId = gameTitleMappings[selectGameMenu.value];
+        updateBarChart();
+    }
 }
 
 var populateGameField = function(idMappings){
     gameTitleMappings = {};
-    selectGameMenu.length = 0;
-    
-    for(mappingIndex in idMappings.games){
-        var mapping = idMappings.games[mappingIndex];
-        gameTitleMappings[mapping.gameTitle] = mapping.gameId;
+    try {
+        selectGameMenu.length = 0;
         
-        var option = document.createElement('option');
-        selectGameMenu.add(option, 0);
-        option.text = option.value = mapping.gameTitle;
+        for(mappingIndex in idMappings.games){
+            var mapping = idMappings.games[mappingIndex];
+            gameTitleMappings[mapping.gameTitle] = mapping.gameId;
+            
+            var option = document.createElement('option');
+            selectGameMenu.add(option, 0);
+            option.text = option.value = mapping.gameTitle;
+        }
+        
+        selectGameMenu.disabled = false;
+        currentGameId = gameTitleMappings[selectGameMenu.value];
+    } catch (error) {
+        console.error(error);
     }
-    
-    selectGameMenu.disabled = false;
-    currentGameId = gameTitleMappings[selectGameMenu.value];
     
     apiGet('users/me', receiveMyId);
 }
@@ -256,10 +268,10 @@ var receiveMyId = function(userInfo) {
     
     //userIdNum = userId;
     //document.getElementById("submitbutton").disabled = false;
-    $("#myusername").text(userInfo.username);
-
-    avatarUrl = 'https://cdn.discordapp.com/avatars/'
     try {
+        $("#myusername").text(userInfo.username);
+    
+        avatarUrl = 'https://cdn.discordapp.com/avatars/'
         avatarUrl = avatarUrl + userInfo.userId + '/' + userInfo.avatar + '.png'
         $("#myavatar").attr("src",avatarUrl);
     } catch (error) {
@@ -270,22 +282,27 @@ var receiveMyId = function(userInfo) {
 };
 
 var letsGo = function() {
-    var ctx = document.getElementById('barchart').getContext('2d');
-    
-    window.myBar = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: "User Wins by Date"
+
+    try {
+        var ctx = document.getElementById('barchart').getContext('2d');
+        
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: "User Wins by Date"
+                }
             }
-        }
-    });
+        });
+    } catch (error) {
+
+    }
     
     apiGet('games', populateGameField);
 };
