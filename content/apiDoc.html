@@ -1,0 +1,354 @@
+
+<h1>
+        API Documentation</h1>
+<h2>
+        Base Url</h2>
+<p>
+        <a
+href="https://ddby5gvlcj.execute-api.us-east-2.amazonaws.com/prod/">https://ddby5gvlcj.execute-api.us-east-2.amazonaws.com/prod/</a>
+</p>
+<h2>
+        For all Endpoints</h2>
+<h3>API key</h3>
+<p>
+Include your API key either within the query section of the endpoint or within
+the header of your request message.
+</p>
+<p>
+        <strong>URL	<em>/{endpoint}</em></strong>?<span
+style="text-decoration:underline;">apikey={yourapikey}</span>
+</p>
+<p>
+        <strong>Header</strong>	…
+</p>
+<p>
+                headers: {
+</p>
+<p>
+        	“x-api-key” : {yourapikey}
+</p>
+<p>
+        }
+</p>
+<p>
+        ...
+</p>
+<h3>
+        Options</h3>
+<p>
+        <strong>OPTIONS</strong>	All of the following api endpoints accept an
+OPTIONS request to view all available verbs for that endpoint
+</p>
+<h2>
+        Resources</h2>
+<h3>
+        /games</h3>
+<p>
+For accessing the available list of game titles and the IDs they correspond to.
+</p>
+<p>
+        <strong>GET</strong>	Get a list of all game ids and the titles they map
+to
+</p>
+<p>
+        <strong>POST</strong>	[Admin only]
+</p>
+<h4>
+        /games/{game}/id</h4>
+<p>
+        <strong>GET</strong>	Get the id of a specific game corresponding to the
+title {game}
+</p>
+<p>
+        <strong>Example</strong>	<strong>GET		</strong>/game/Apex_Legends/id
+</p>
+<p>
+        	Response	1
+</p>
+<h4>
+        /games/{game}/title</h4>
+<p>
+        <strong>GET</strong>	Get the title of a specific game corresponding to
+the id {game}
+</p>
+<p>
+        <strong>Example	GET 		</strong>/game/1/title
+</p>
+<p>
+        	Response	“Apex Legends”
+</p>
+<h3>
+        /users</h3>
+<p>
+        For accessing the identifying information of all users within the
+system.
+</p>
+<p>
+        User information schema
+</p>
+<ul>
+<li><em>string <strong>username</strong></em>	The discord username
+<li><em>string <strong>discriminator</strong></em>	Discord username
+discriminator
+<li><em>string <strong>userId</strong></em>		The user’s ID within the wins
+database
+</ul>
+<p>
+        <strong>GET</strong>	Get the user information for a specific user
+corresponding to the {userId} given in the URL query.
+</p>
+<p>
+        <strong>Example</strong>	<strong>GET</strong>		/users?userId=123456789
+</p>
+<p>
+        	Response	{
+</p>
+<p>
+                            “username” : ”My_User”,
+</p>
+<p>
+                            “discriminator” : ”1234”,
+</p>
+<p>
+                            “userId” : “123456789”
+</p>
+<p>
+                        }
+</p>
+<h4>
+        /users/me</h4>
+<p>
+        <strong>GET</strong>	Get the user ID corresponding to your API key
+</p>
+<p>
+        <strong>Example	GET		</strong>/users/me
+</p>
+<p>
+        	Response	“123456789”
+</p>
+</li>
+</ul>
+<p>
+</p>
+<h4>
+        /users/id/{username}/{discriminator}</h4>
+<p>
+        <strong>GET</strong>	Get the user information for the specific user
+corresponding to the given discord {username}#{discriminator} combination
+</p>
+<p>
+        <strong>Example	GET		</strong>/users/id/My_User/1234
+</p>
+<p>
+        	Response	{
+</p>
+<p>
+                            “username” : ”My_User”,
+</p>
+<p>
+                            “discriminator” : ”1234”,
+</p>
+<p>
+                            “userId” : “123456789”
+</p>
+<p>
+                        }
+</p>
+<h5>
+        /users/identity/{userId}</h5>
+<p>
+        <strong>GET</strong>	Get the user information for the specific user
+corresponding to the given {userId}
+</p>
+<p>
+        <strong>Example	GET		</strong>/users/identity/123456789
+</p>
+<p>
+        	Response	{
+</p>
+<p>
+                            “username” : ”My_User”,
+</p>
+<p>
+                            “discriminator” : ”1234”,
+</p>
+<p>
+                            “userId” : “123456789”
+</p>
+<p>
+                        }
+</p>
+<h3>
+        /wins</h3>
+<p>
+For adding daily wins and accessing wins data for yourself and other users.
+</p>
+<p>
+Daily wins data query result schema:
+</p>
+<ul>
+<li><em>string <strong>userId</strong></em>			The ID of the user these wins
+belong to
+<li><em>string <strong>[queryStartDate]</strong></em>	The beginning of the
+data’s date range
+<li><em>string <strong>[queryToDate]</strong></em>		The end of the data’s date
+range
+<li><em>obj <strong>dailyWins</strong></em>			The collection of wins data for
+this query
+<ul>
+<li><em>obj </em>{<strong>date</strong>}		The collection of wins data on {date}
+<ul>
+<li><em>int </em>{<strong>gameId</strong>}	The number of wins on {date} for the
+given game
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+        <strong>POST</strong>	Add {count} to the number of wins for your user Id
+on today’s date, for a game represented by valid id {gameId}. Provide {count}
+and {gameId} within the data section of your request as labled parts of a JSON
+object, as “wins” and “gameId” respectively.
+</p>
+<p>
+        <strong>Example	POST 		</strong>/wins
+</p>
+<p>
+                	...
+</p>
+<p>
+                	data : {
+</p>
+<p>
+                            “gameId” : 2,
+</p>
+<p>
+                            “wins” : 3
+</p>
+<p>
+                        }
+</p>
+<p>
+                        ...
+</p>
+<h5>
+        /wins/{userId}/{date}</h5>
+<p>
+        <strong>GET</strong>	Get a list of all wins data of the user
+corresponding to {userId} from {date} to today
+</p>
+<p>
+        <strong>PUT	</strong>Add {count} to the number of wins for {userId} on
+{date} for a game corresponding to {gameId}. Provide {count} and {gameId} within
+the data section of your request as labled parts of a JSON object, as “wins” and
+“gameId” respectively.
+</p>
+<p>
+        <strong>Example</strong>	<strong>GET</strong>
+/wins/123456789/2019-12-05
+</p>
+<p>
+        	Response	{
+</p>
+<p>
+        				“userId” : “123456789”,
+</p>
+<p>
+        				“[queryStartDate]” : “2019-12-05”,
+</p>
+<p>
+        				“[queryToDate]” : “2019-12-07”,
+</p>
+<p>
+        				“dailyWins” : {
+</p>
+<p>
+        					“2019-12-06” : {
+</p>
+<p>
+        						“1” : 2
+</p>
+<p>
+        					},
+</p>
+<p>
+        					“2019-12-07” : {
+</p>
+<p>
+        						“1” : 7
+</p>
+<p>
+        						“2” : 2,
+</p>
+<p>
+        					}
+</p>
+<p>
+        				}
+</p>
+<p>
+        			}
+</p>
+<p>
+        	<strong>PUT 		</strong>/wins/123456789/2019-12-06
+</p>
+<p>
+                	...
+</p>
+<p>
+                	data : {
+</p>
+<p>
+                            “gameId” : 2,
+</p>
+<p>
+                            “wins” : 3
+</p>
+<p>
+                        }
+</p>
+<p>
+                        ...
+</p>
+<h5>
+        /wins/{userId}/{date}/{untilDate}</h5>
+<p>
+        <strong>GET</strong>	Get a list of all wins data of the user
+corresponding to {userId} from {date} to {untilDate}.
+</p>
+<p>
+        <strong>Example</strong>	<strong>GET</strong>
+/wins/123456789/2019-12-05
+</p>
+<p>
+        	Response	{
+</p>
+<p>
+        				“userId” : “123456789”,
+</p>
+<p>
+        				“[queryStartDate]” : “2019-12-05”,
+</p>
+<p>
+        				“[queryToDate]” : “2019-12-06”,
+</p>
+<p>
+        				“dailyWins” : {
+</p>
+<p>
+        					“2019-12-06” : {
+</p>
+<p>
+        						“1” : 2
+</p>
+<p>
+        					}
+</p>
+<p>
+        				}
+</p>
+<p>
+        			}
+</p>
