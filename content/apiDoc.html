@@ -1,22 +1,18 @@
 
+
 <h1>
         API Documentation</h1>
 <h2>
         Base Url</h2>
 <p>
         <a
-href="https://ddby5gvlcj.execute-api.us-east-2.amazonaws.com/prod/">https://ddby5gvlcj.execute-api.us-east-2.amazonaws.com/prod/</a>
+href="https://dkyl9z4wmpycr.cloudfront.net/api/">https://dkyl9z4wmpycr.cloudfront.net/api/</a>
 </p>
 <h2>
         For all Endpoints</h2>
 <h3>API key</h3>
 <p>
-Include your API key either within the query section of the endpoint or within
-the header of your request message.
-</p>
-<p>
-        <strong>URL	<em>/{endpoint}</em></strong>?<span
-style="text-decoration:underline;">apikey={yourapikey}</span>
+Include your API key within the headers section of your HTTP request message.
 </p>
 <p>
         <strong>Header</strong>	…
@@ -189,9 +185,9 @@ Daily wins data query result schema:
 <ul>
 <li><em>string <strong>userId</strong></em>			The ID of the user these wins
 belong to
-<li><em>string <strong>[queryStartDate]</strong></em>	The beginning of the
+<li><em>string <strong>fromDate</strong></em>	The beginning of the
 data’s date range
-<li><em>string <strong>[queryToDate]</strong></em>		The end of the data’s date
+<li><em>string <strong>toDate</strong></em>		The end of the data’s date
 range
 <li><em>obj <strong>dailyWins</strong></em>			The collection of wins data for
 this query
@@ -256,10 +252,10 @@ the data section of your request as labled parts of a JSON object, as “wins”
         				“userId” : “123456789”,
 </p>
 <p>
-        				“[queryStartDate]” : “2019-12-05”,
+        				“fromDate” : “2019-12-05”,
 </p>
 <p>
-        				“[queryToDate]” : “2019-12-07”,
+        				“toDate” : “2019-12-07”,
 </p>
 <p>
         				“dailyWins” : {
@@ -329,10 +325,10 @@ corresponding to {userId} from {date} to {untilDate}.
         				“userId” : “123456789”,
 </p>
 <p>
-        				“[queryStartDate]” : “2019-12-05”,
+        				“fromDate” : “2019-12-05”,
 </p>
 <p>
-        				“[queryToDate]” : “2019-12-06”,
+        				“toDate” : “2019-12-06”,
 </p>
 <p>
         				“dailyWins” : {
