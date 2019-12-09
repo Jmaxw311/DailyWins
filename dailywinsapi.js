@@ -3,11 +3,6 @@
 const initDailyWins = function(onDailyWinsApiReady) {
 
     var apiUrl = 'https://dkyl9z4wmpycr.cloudfront.net/api/';
-
-    const getCookie = function(name) {
-        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-        return v ? v[2] : null;
-    };
     
     const getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1),
@@ -23,10 +18,6 @@ const initDailyWins = function(onDailyWinsApiReady) {
             }
         }
     };
-
-    // var apiKey = getUrlParameter('x-api-key');
-    // if(apiKey === null || typeof apiKey === 'undefined')
-    //     apiKey = getCookie('dwapikey');
 
     var onSuccess = function(data, customHeaders) {
         var apiKey = data['apiKey'];
@@ -89,5 +80,5 @@ const initDailyWins = function(onDailyWinsApiReady) {
 };
 
 const requestAuthorization = function() {
-    window.location.replace("http://dailywinsapi.zapto.org");
+    window.location.replace("https://discordapp.com/api/oauth2/authorize?client_id=648629113132810262&redirect_uri=https%3A%2F%2Fdkyl9z4wmpycr.cloudfront.net%2Findex.html&response_type=code&scope=identify");
 }
