@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="app.css">
 <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
 <script src="chart.js"></script>
 <script src="dailywinsapi.js"></script>
 <script src="includeHTML.js"></script>
@@ -75,11 +76,25 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 	<p>The DailyWins service allows you to record and track your daily wins in various video games, plus compare your wins to other users' by day. Log in with discord to start using the site, and check the documentation page if you want to see how to use the API directly.</p>
     <p>CSS Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> and <a href="https://purecss.io/" target="_blank">Pure.css</a></p>
   </footer>
-
   <!-- End page content -->
 </div>
 
+<!--<div id="loadingOverlay" style="position:fixed; left:0; right:0;bottom:0;top:0;text-align: center;vertical-align:middle;background:black; color:white;z-index: 3; background: radial-gradient(50vh  black ar)">
+	<div style="position:absolute;left:50vw;top:50vh;right:50vw;bottom:50vh;">
+		<p style="translate: -50% -50%;">Loading...</p>
+	</div>
+</div>-->
 <script>
+
+try {
+	$.LoadingOverlay("show", {
+		background  : "rgba(0.0, 0.0, 0.0, 0.8)",
+		imageColor  : "rgba(255, 255, 255, 0.95)"
+	});
+} catch (error) {
+	console.error(error);
+}
+
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 
@@ -113,6 +128,11 @@ includeHTML();
 
 function accessApi() {
 	var showApiKey;
+	try {
+		$.LoadingOverlay("hide");
+	} catch (error) {
+		console.error(error);
+	}
 	try {
 		initDailyWins(function(a,b,giveApiKey) { 
 			showApiKey = giveApiKey;
