@@ -126,6 +126,14 @@ const loadSubPage = function(page) {
 };
 includeHTML();
 
+setTimeout(function(){
+	$("#currentTimeUTC").text(getRelativeDateString(0));
+}, 100); // quick, for performance
+
+setTimeout(function(){
+	$("#currentTimeUTC").text(getRelativeDateString(0));
+}, 2000); // slow, for reliability
+
 function accessApi() {
 	var showApiKey;
 	try {

@@ -1,4 +1,7 @@
-<button onclick="showApiKey();" class="pure-button button-c">Get my API key</button>
+<form class="pure-form pure-form-stacked" onsubmit="return false;">
+    <label for="getKey">Retrieve your API key:</label>
+    <button id="getKey" name="getKey" onclick="showApiKey();" class="pure-button button-c">Show key</button>
+</form>
 <hr>
 <form class="pure-form pure-form-stacked" onsubmit="return false;">
     <label for="gameSelect">Log wins:</label>
@@ -6,4 +9,6 @@
     
     <input type="number" id="winsInput" placeholder="# of wins" class="darkform" value="1" min="0">
     <button class="pure-button button-c" onclick="postWins();">Submit</button>
+
+    <span class="pure-form-message">Current date is based on UTC time zone (<span id="currentTimeUTC">loading date</span>).</span>
 </form>

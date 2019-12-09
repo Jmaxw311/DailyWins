@@ -5,6 +5,17 @@ var userIDMappings = {};
 
 var postWins;
 
+const getRelativeDateString = function(daysOffset) {
+    var relDate = new Date();
+    relDate.setDate(relDate.getUTCDate() + daysOffset);
+    var dd = String(relDate.getDate()).padStart(2, '0');
+    var mm = String(relDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = relDate.getFullYear();
+    
+    relDate = yyyy + '-' + mm + '-' + dd;
+    return relDate
+};
+
 var showDailyWinsPlot = function(apiGet,apiPost) {
 
 function getKeyByValue(object, value) {
@@ -63,17 +74,6 @@ var newUserField = document.getElementById("newusername");
 var addUserButton = document.getElementById("addUser");
 var selectGameMenu = document.getElementById("gameSelect");
 var startDateSelect = document.getElementById("startDateSelect");
-
-var getRelativeDateString = function(daysOffset) {
-    var relDate = new Date();
-    relDate.setDate(relDate.getDate() + daysOffset);
-    var dd = String(relDate.getDate()).padStart(2, '0');
-    var mm = String(relDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = relDate.getFullYear();
-    
-    relDate = yyyy + '-' + mm + '-' + dd;
-    return relDate
-};
 
 try {
     toDateSelect.max = getRelativeDateString(0);
