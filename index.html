@@ -137,13 +137,13 @@ setTimeout(function(){
 function accessApi() {
 	var showApiKey;
 	try {
-		$.LoadingOverlay("hide");
-	} catch (error) {
-		console.error(error);
-	}
-	try {
 		initDailyWins(function(a,b,giveApiKey) { 
 			showApiKey = giveApiKey;
+			try {
+				$.LoadingOverlay("hide");
+			} catch (error) {
+				console.error(error);
+			}
 			try {
 				showDailyWinsPlot(a,b);
 			} catch (error) {
