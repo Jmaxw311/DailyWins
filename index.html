@@ -71,7 +71,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-grey">
     <h4>CSS 436 A</h4>
-    <p>Created by Joel Maxwell and Sam Krogh</p>
+	<p>Created by Joel Maxwell and Sam Krogh</p>
+	<p>The DailyWins service allows you to record and track your daily wins in various video games, plus compare your wins to other users' by day. Log in with discord to start using the site, and check the documentation page if you want to see how to use the API directly.</p>
     <p>CSS Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> and <a href="https://purecss.io/" target="_blank">Pure.css</a></p>
   </footer>
 
@@ -113,8 +114,6 @@ includeHTML();
 function accessApi() {
 	var showApiKey;
 	try {
-		var delayInMilliseconds = 200; //1 second
-		
 		initDailyWins(function(a,b,giveApiKey) { 
 			showApiKey = giveApiKey;
 			try {
